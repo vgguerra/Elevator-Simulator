@@ -4,7 +4,7 @@ classDiagram
     direction TD
 
     class Botao{
-      -boolean estado
+      -boolean estadoBotao
 
       +ativaBotao() boolean
       +desativaBotao() boolean
@@ -21,7 +21,7 @@ classDiagram
     }
 
     class PainelInterno{
-      -ArrayList~Botao~ andares
+      -ArrayList~Botao~ botoesAndares
       -int andar
       -String visor
 

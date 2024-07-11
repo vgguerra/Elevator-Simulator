@@ -1,7 +1,7 @@
 package engtelecom.poo;
 
-class AppTest {
-
+public class TestePredio {
     
-
 }
+
+
