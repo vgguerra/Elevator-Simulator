@@ -1,5 +1,7 @@
 package engtelecom.poo;
 
+import java.util.ArrayList;
+
 /**
  * Representa o painel interno de
  * 
@@ -31,7 +33,7 @@ public class PainelInterno{
      */
 
      public PainelInterno(int numAndar){
-        this.numAndar = numAndar + 1;
+        this.botoesAndares = new ArrayList<>(numAndar);
         this.andar = 0;
         this.visor = "Estático";
      }
@@ -42,8 +44,9 @@ public class PainelInterno{
       * @return boolean
       */
 
-    public selecioneAndar(int andar){
-
+    public boolean selecioneAndar(int andar){
+        botoesAndares.get(andar).ativaBotado();
+        return botoesAndares.get(andar).isEstadoBotao();
     }
 
     /**
@@ -79,5 +82,8 @@ public class PainelInterno{
         this.andar = andar;
     }
 
+    public int numAndares(){
+        return this.botoesAndares.size();
+    }
 
 }

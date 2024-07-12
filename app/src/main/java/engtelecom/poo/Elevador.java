@@ -1,5 +1,5 @@
 package engtelecom.poo;
 
-public class Elavador{
-    
+public class Elevador{
+
 }

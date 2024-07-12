@@ -20,7 +20,7 @@ public class Botao{
      */
     public boolean ativaBotado(){
         estadoBotao = true;
-        retorn estadoBotao;
+        return estadoBotao;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Botao{
      */
     public boolean desativaBotao(){
         estadoBotao = false;
-        retorn estadoBotao;
+        return estadoBotao;
     }
 
     /**
