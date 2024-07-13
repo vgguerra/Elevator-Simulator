@@ -33,13 +33,13 @@ classDiagram
       -int numAndares
       -ArrayList~PainelExterno~ paineis
       -Elevador elevador
+
+      +chamaElevador() boolean
+      +selecionaAndar() boolean
     }
 
     class App{
       -Predio predio
-
-      +chamaElevador() boolean
-      +selecionaAndar() boolean
     }
 
 
