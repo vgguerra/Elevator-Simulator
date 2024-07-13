@@ -34,8 +34,8 @@ classDiagram
       -ArrayList~PainelExterno~ paineis
       -Elevador elevador
 
-      +chamaElevador() boolean
-      +selecionaAndar() boolean
+      +chamaElevador(sobeDesce,andar) boolean
+      +selecionaAndar(andar) boolean
     }
 
     class App{
