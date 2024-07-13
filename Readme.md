@@ -20,16 +20,12 @@ classDiagram
       +apertarBotaoDescida() boolean
     }
 
-    class PainelInterno{
+    class Elevador{
       -ArrayList~Botao~ botoesAndares
       -int andar
       -String visor
 
       +selecioneAndar(int andar) boolean
-    }
-
-    class Elevador{
-      -PainelInterno painel
     }
 
 
@@ -48,8 +44,7 @@ classDiagram
 
 
     Botao "2" --* "1" PainelExterno
-    Botao "1..*" --* "1" PainelInterno
-    PainelInterno "1" --* "1" Elevador
+    Botao "1..*" --* "1" Elevador
     PainelExterno "1" --* "1" Predio
     Elevador "1" --* "1" Predio    
     Predio "1" --* "1" App

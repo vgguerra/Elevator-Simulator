@@ -11,22 +11,11 @@ public class TesteBotao {
 
         assertFalse(botao.isEstadoBotao());
 
-        botao.ativaBotado();
+        botao.ativaBotao();
         assertTrue(botao.isEstadoBotao());
 
         botao.desativaBotao();
         assertFalse(botao.isEstadoBotao());
     }
-
-    @Test
-    public void testaPainelInterno(){
-        PainelInterno painelInterno = new PainelInterno(10);
-
-
-        assertEquals(11,painelInterno.numAndares());
-        assertTrue(painelInterno.selecioneAndar(2));
-    }
-
-
     
 }

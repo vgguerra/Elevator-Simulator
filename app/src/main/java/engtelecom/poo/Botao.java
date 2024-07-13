@@ -18,7 +18,7 @@ public class Botao{
      * Irá ativar o botão e irá retornar o estado dele(Falso para apagado, verdadeiro para aceso)
      * @return boolean
      */
-    public boolean ativaBotado(){
+    public boolean ativaBotao(){
         estadoBotao = true;
         return estadoBotao;
     }
