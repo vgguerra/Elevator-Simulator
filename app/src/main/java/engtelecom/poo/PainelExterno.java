@@ -1,7 +1,5 @@
 package engtelecom.poo;
 
-import org.checkerframework.checker.units.qual.t;
-
 public class PainelExterno{
 
     /**
