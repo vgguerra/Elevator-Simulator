@@ -2,7 +2,6 @@ package engtelecom.poo;
 
 import org.junit.jupiter.api.Test;
 
-import static java.lang.StringTemplate.STR;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestePainelExterno {
@@ -16,10 +15,10 @@ public class TestePainelExterno {
         assertTrue(painelExterno.apertarBotaoDescida());
 
         painelExterno.apertarBotaoSubida();
-        assertEquals("⬆️", painelExterno.getVisor());
+        assertEquals("⬆", painelExterno.getVisor());
 
         painelExterno.apertarBotaoDescida();
-        assertEquals("⬇️", painelExterno.getVisor());
+        assertEquals("⬇", painelExterno.getVisor());
 
 
     }

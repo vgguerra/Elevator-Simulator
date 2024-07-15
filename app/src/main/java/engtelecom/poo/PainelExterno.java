@@ -40,7 +40,7 @@ public class PainelExterno{
      */
     public boolean apertarBotaoDescida(){
         desce.ativaBotao();
-        setVisor("⬇️");
+        setVisor("⬇");
         return desce.isEstadoBotao();
     }
 
@@ -50,7 +50,7 @@ public class PainelExterno{
      */
     public boolean apertarBotaoSubida(){
         this.sobe.ativaBotao();
-        setVisor("⬆️");
+        setVisor("⬆");
         return sobe.isEstadoBotao();
     }
 
