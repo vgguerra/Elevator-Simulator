@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Predio{
 
     /**
-     * Irá representar o número de andares que o prédio terá 
+     * Irá representar o número de andares que o prédio terá
      */
     private int numAndares;
 
@@ -27,7 +27,7 @@ public class Predio{
 
     /**
      * Método construtor que irá instaciar um predio para a utilização do elevador dele
-     * 
+     *
      * @param numAndares
      */
     public Predio(int numAndar){
@@ -40,33 +40,44 @@ public class Predio{
         }
     }
 
+    /**
+     * Irá retornar o estado de um botão do painela interno de um elevador(Verdadeiro para aceso e falso para apagado).
+     * @param andar
+     * @return boolean
+     */
+    public boolean getEstadoBotaoElevador(int andar){
+        return elevador.getEstadoBotao(andar);
+    }
+
+    public void desativaBota(int andar){
+     elevador.desativaBotao(andar);
+    }
+
 
     /**
      * Método que irá ser utilizado para que o usuário chame o elevador no andar onde o usuário esta, onde o usuário deve selecionar se irá subir ou descer e indicar o andar onde está.
      * Caso o andar passado seja inválido, ou seja, menor que 0 ou maior que o andar mais alto do prédio, ou caso a direção passada seja inválida,o método retornará falso.
-     * 
+     *
      * @param sobeDesce
      * @param andar
      * @return boolean
      */
-    public boolean chamaElevador(String sobeDesce,int andar){
+    public boolean chamaElevador(String sobeDesce,int andar,String visor){
 
         if(sobeDesce.equals("Subir") && andar >= 0 && andar < numAndares ){
             this.paineisExternos.get(andar).apertarBotaoSubida();
+            this.paineisExternos.get(andar).setVisor(visor);
             return true;
         }if(sobeDesce.equals("Descer") && andar >= 0 && andar < numAndares){
             this.paineisExternos.get(andar).apertarBotaoDescida();
+            this.paineisExternos.get(andar).setVisor(visor);
             return true;
         }
         return false;
     }
 
     public boolean selecioneAndar(int andar){
-        if(andar >= 0 && andar < numAndares){
-
-            return elevador.selecioneAndar(andar);
-        }
-        return false;
+        return elevador.selecioneAndar(andar);
     }
 
     /**
@@ -75,6 +86,50 @@ public class Predio{
      */
     public int getNumAndares() {
         return numAndares;
+    }
+
+    /**
+     * Irá alterar a direção para onde o elevador está indo (Subindo ou descendo)
+     * @param andar
+     */
+    public String getVisorPainelExterno(int andar){
+        return paineisExternos.get(andar).getVisor();
+    }
+
+    public void setVisorPainelExterno(String visor, int andar){
+        paineisExternos.get(andar).setVisor(visor);
+    }
+
+    /**
+     * Irá retornar a direção para onde o elevador está indo
+      * @return String
+     */
+    public String getVisorElevador(){
+        return elevador.getVisor();
+    }
+
+    /**
+     * Irá alterar a direcção para onde o elevador está indo(subindo ou descendo)
+     * @param visor
+     */
+    public void setVisorElevador(String visor){
+        elevador.setVisor(visor);
+    }
+
+    /**
+     * Irá retornar o andar em que o elevador se encontra no momento
+     * @return int
+     */
+    public int getAndarAtual(){
+        return elevador.getAndar();
+    }
+
+    /**
+     * Irá indicar o andar em que o elevador se encontra no momento
+     * @param andar
+     */
+    public void setAndarAtual(int andar){
+        elevador.setAndar(andar);
     }
 
 

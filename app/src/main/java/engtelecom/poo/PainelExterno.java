@@ -27,7 +27,7 @@ public class PainelExterno{
      */
     public PainelExterno(){
         this.andar = 0;
-        this.visor = "";
+        this.visor = "---";
         this.sobe = new Botao();
         this.desce = new Botao();
     }
@@ -38,7 +38,6 @@ public class PainelExterno{
      */
     public boolean apertarBotaoDescida(){
         desce.ativaBotao();
-        setVisor("⬇");
         return desce.isEstadoBotao();
     }
 
@@ -48,7 +47,6 @@ public class PainelExterno{
      */
     public boolean apertarBotaoSubida(){
         this.sobe.ativaBotao();
-        setVisor("⬆");
         return sobe.isEstadoBotao();
     }
 

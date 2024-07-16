@@ -56,6 +56,23 @@ public class Elevador{
     }
 
     /**
+     * Irá retornar se o botão no painel interna de um determinado andar esta aceso ou não
+     * @param andar
+     * @return boolean
+     */
+    public boolean getEstadoBotao(int andar){
+        return botoesAndares.get(andar).isEstadoBotao();
+    }
+
+    /**
+     * Irá desativar um botão.
+     * @param andar
+     */
+    public void desativaBotao(int andar){
+        botoesAndares.get(andar).desativaBotao();
+    }
+
+    /**
      * Irá retornar o que está sendo apresentado no visor
      * @return String
      */
