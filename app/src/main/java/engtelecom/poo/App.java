@@ -60,99 +60,28 @@ public class App {
         App app = new App(teclado.nextInt());
         teclado.nextLine();
 
-
         int escolha = -1;
-        app.dentro = true;
-        while(escolha != 0){
-            if(!app.dentro){
-                System.out.print("Selecione a opção para chamar o elevador: \"Descer\" para pressionar o botão de descer ou \"Subir\" para pressionar o botão de subir:");
-                String opcao = teclado.nextLine();
-                if(app.andarAtual > app.predio.getAndarAtual()){
-                    app.predio.chamaElevador(opcao,app.andarAtual,"⬆");
-                    app.dentro = true;
-                }else if(app.andarAtual < app.predio.getAndarAtual()){
-                    app.predio.chamaElevador(opcao,app.andarAtual,"⬇");
-                    app.dentro = true;
-                } else {
-                    System.out.println("O elevador já está em seu andar");
-                    app.dentro = true;
-                }
-                System.out.println("Andar atual: " + app.andarAtual + " || Direção: " + app.predio.getVisorPainelExterno(app.andarAtual));
+        
+        while (escolha != 0 ) {
+            System.out.println("Você está dentro ou fora do elevador?");
+            if(teclado.nextLine().equals("Dentro")){
+                
             }else{
-                System.out.print("Selecione para qual andar você deseja ir: 0 - ");
-                for (int i = 1;i < app.numAndar;i++){
-                    if(i == app.numAndar - 1 ){
-                        System.out.println(i+":");
-                    }else{
-                        System.out.print(i + " - ");
-                    }
-                }
-                int andar = teclado.nextInt();
-                if(andar == app.andarAtual || andar < 0 || andar >= app.numAndar ){
-                    while(app.andarAtual == andar || andar < 0 || andar >= app.numAndar){
-                    System.out.println("Selecione outro andar: ");
-                    andar = teclado.nextInt();
-                }}
-                app.predio.selecioneAndar(andar);
+                System.out.println("Em qual andar você está?");
+                app.andarAtual = teclado.nextInt();
                 teclado.nextLine();
 
-                if(app.andarAtual > andar) {
-                    for (int i = app.andarAtual; i >= andar; i--) {
-                        if(app.andarAtual == andar){
-                            app.predio.desativaBota(andar);
-                            app.predio.setVisorElevador("---");
-                            app.predio.setVisorPainelExterno("---",andar);
-                        }else{
-                            app.predio.setVisorElevador("⬇");
-                            app.predio.setVisorPainelExterno("⬇",andar);
-                        }
-                        System.out.println("Visor externo no "+ andar +  "° Andar -  Visor: " + app.predio.getVisorPainelExterno(andar)+ " " + app.andarAtual   +  "|| Painel dentro do elevador - Andar: " + app.andarAtual + " | Direção: " + app.predio.getVisorElevador());
-                        System.out.print("Botões: ");
-                        for(int j = 0;j < app.numAndar;j++){
-                            int op;
-                            if(app.predio.getEstadoBotaoElevador(j)){
-                                op = 1;
-                            }else{
-                                op = 0;
-                            }
-                            System.out.print(j + "(" + op + ")");
-                        }
-                        System.out.println();
-                        app.predio.setAndarAtual(app.predio.getAndarAtual() - 1);
-                        app.andarAtual--;
-                        Thread.sleep(1000);
-                    }
-                } else{
-                    for(int i = app.andarAtual;i <= andar;i++){
-                        if(app.andarAtual == andar){
-                            app.predio.desativaBota(andar);
-                            app.predio.setVisorElevador("---");
-                            app.predio.setVisorPainelExterno("---",andar);
-                        }else{
-                            app.predio.setVisorElevador("⬆");
-                            app.predio.setVisorPainelExterno("⬆",andar);
-                        }
-                        System.out.println("Visor externo no "+ andar + "° Andar - Visor: " + app.predio.getVisorPainelExterno(andar) + " " + app.andarAtual +    " || Painel dentro do elevador - Andar: " + app.andarAtual + " | Direção: " + app.predio.getVisorElevador());
-                        System.out.print("Botões: " );
-                        for(int j = 0;j < app.numAndar;j++){
-                            int op;
-                            if(app.predio.getEstadoBotaoElevador(j)){
-                                op = 1;
-                            }else{
-                                op = 0;
-                            }
-                            System.out.print(j + "(" + op + ")");
-                        }
-                        System.out.println();
-                        app.predio.setAndarAtual(app.predio.getAndarAtual() + 1);
-                        app.andarAtual++;
-                        Thread.sleep(1000);
-                    }
-                }
-                app.andarAtual = andar;
-                app.dentro = false;
-            }
+                System.out.println("Você deseja subir ou descer?");
+                String sobeDesce = teclado.nextLine(); 
 
+                if(sobeDesce.equals("Subir")){
+                    app.predio.chamaElevador(sobeDesce, app.andarAtual);
+                }else{
+                    app.predio.chamaElevador("Descer", app.andarAtual);
+                }
+
+
+            }
         }
 
     }

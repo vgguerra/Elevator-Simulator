@@ -62,15 +62,15 @@ public class Predio{
      * @param andar
      * @return boolean
      */
-    public boolean chamaElevador(String sobeDesce,int andar,String visor){
+    public boolean chamaElevador(String sobeDesce,int andar){
 
         if(sobeDesce.equals("Subir") && andar >= 0 && andar < numAndares ){
             this.paineisExternos.get(andar).apertarBotaoSubida();
-            this.paineisExternos.get(andar).setVisor(visor);
+            this.paineisExternos.get(andar).setVisor("⬆");
             return true;
         }if(sobeDesce.equals("Descer") && andar >= 0 && andar < numAndares){
             this.paineisExternos.get(andar).apertarBotaoDescida();
-            this.paineisExternos.get(andar).setVisor(visor);
+            this.paineisExternos.get(andar).setVisor("⬇");
             return true;
         }
         return false;
