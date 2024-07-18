@@ -40,17 +40,17 @@ public class Predio{
         }
     }
 
+   
     /**
-     * Irá retornar o estado de um botão do painela interno de um elevador(Verdadeiro para aceso e falso para apagado).
+     * Irá desativar o botão do painel em um determinado andar
      * @param andar
-     * @return boolean
      */
-    public boolean getEstadoBotaoElevador(int andar){
-        return elevador.getEstadoBotao(andar);
-    }
-
-    public void desativaBota(int andar){
+    public void desativaBotaPainelExterno(int andar){
      paineisExternos.get(andar).desativaBotoes();
+    }
+    
+    public void desativaBotaElevador(int andar){
+        elevador.desativaBotao(andar);
     }
 
 
@@ -131,6 +131,18 @@ public class Predio{
 
     public int getEstadoBotaoPainelExternoDesce(int andar){
         if(paineisExternos.get(andar).getDesce()){
+            return 1;
+        }
+        return 0;
+    }
+
+     /**
+     * Irá retornar o estado de um botão do painela interno de um elevador(Verdadeiro para aceso e falso para apagado).
+     * @param andar
+     * @return int
+     */
+    public int getEstadoBotaoElevador(int andar){
+        if(elevador.getEstadoBotao(andar)){
             return 1;
         }
         return 0;
