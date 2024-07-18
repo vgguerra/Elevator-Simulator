@@ -50,6 +50,11 @@ public class PainelExterno{
         return sobe.isEstadoBotao();
     }
 
+    public void desativaBotoes(){
+        this.sobe.desativaBotao();
+        this.desce.desativaBotao();
+    }
+
     /**
      * Irá retornar se o botão está ativo ou não (True para ativo e false para desativado)
      * @return boolean

@@ -3,86 +3,148 @@ package engtelecom.poo;
 import java.util.Scanner;
 
 /**
-     * Classe App, onde terá nosso método main para executar nosso programa
-     * 
-     * @author Victor Guerra
-     */
+ * Classe App, onde terá nosso método main para executar nosso programa
+ *
+ * @author Victor Guerra
+ */
 
 public class App {
 
-    /**
-     * Irá representar um prédio
-     */
     private Predio predio;
-
-    /**
-     * Irá indicar o andar em que o usuário se encontra
-     */
     private int andarAtual;
-
-    /**
-     * Irá indicar se o usuário está ou não dentro do elevador no momento
-     */
-    private boolean dentro;
-
-    /**
-     * Irá indicar o número de andares do prédio
-     */
     private int numAndar;
-
-    /**
-     * Irá ser utilizado para ler do teclado as informações necessárias
-     */
     private static Scanner teclado = new Scanner(System.in);
 
-    /**
-     * Método construtor, onde irá instanciar um prédio. O número de andares do prédio deve ser sempre um valor positivo. Caso seja passado um valor negativo, o programa irá iniciar um prédio com 10 andares.
-     * @param numAndar
-     */
-    public App(int numAndar){
-        if(numAndar <= 0){
+    public App(int numAndar) {
+        if (numAndar <= 0) {
             numAndar = 10;
         }
         this.predio = new Predio(numAndar);
         this.andarAtual = 0;
-        this.dentro = false;
         this.numAndar = numAndar;
-
     }
 
-    /**
-     * Método main, onde será feita a execução do programa
-     * @param args
-     */
     public static void main(String[] args) throws InterruptedException {
         System.out.print("Digite o número de andares que o prédio terá, sendo um deles o 0: ");
-
         App app = new App(teclado.nextInt());
         teclado.nextLine();
 
         int escolha = -1;
-        
-        while (escolha != 0 ) {
+
+        while (escolha != 0) {
             System.out.println("Você está dentro ou fora do elevador?");
-            if(teclado.nextLine().equals("Dentro")){
-                
-            }else{
+            String dentroFora = teclado.nextLine();
+
+            if (dentroFora.equalsIgnoreCase("Dentro")) {
+                System.out.print("Digite para qual andar você deseja ir: ");
+                int andarDesejado = teclado.nextInt();
+                teclado.nextLine();
+
+                if (andarDesejado > app.predio.getAndarAtual()) {
+                    for (int j = app.predio.getAndarAtual(); j <= andarDesejado; j++) {
+                        if (j == app.predio.getAndarAtual()) {
+                            System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                    + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                    + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                        } else {
+                            System.out.println(j + "° Andar: Elevador: Subindo | Andar: " + j + " Botões: subir ("
+                                    + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                    + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                        }
+                        Thread.sleep(1000);
+                    }
+                } else if (andarDesejado < app.predio.getAndarAtual()) {
+                    for (int j = app.predio.getAndarAtual(); j >= andarDesejado; j--) {
+                        if (j == app.predio.getAndarAtual()) {
+                            System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                    + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                    + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                        } else {
+                            System.out.println(j + "° Andar: Elevador: Descendo | Andar: " + j + " Botões: subir ("
+                                    + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                    + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                        }
+                        Thread.sleep(1000);
+                    }
+                }
+                app.predio.setAndarAtual(andarDesejado);
+                app.predio.desativaBota(andarDesejado);
+
+            } else {
                 System.out.println("Em qual andar você está?");
                 app.andarAtual = teclado.nextInt();
                 teclado.nextLine();
 
                 System.out.println("Você deseja subir ou descer?");
-                String sobeDesce = teclado.nextLine(); 
+                String sobeDesce = teclado.nextLine();
 
-                if(sobeDesce.equals("Subir")){
-                    app.predio.chamaElevador(sobeDesce, app.andarAtual);
-                }else{
+                if (sobeDesce.equalsIgnoreCase("Subir")) {
+                    app.predio.chamaElevador("Subir", app.andarAtual);
+                    for (int j = 0; j < app.numAndar; j++) {
+                        if (app.andarAtual > app.predio.getAndarAtual()) {
+                            if (j < app.predio.getAndarAtual()) {
+                                System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j
+                                        + " Botões: subir (" + app.predio.getEstadoBotaoPainelExternoSobe(j)
+                                        + ") descer: (" + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            } else if (j < app.andarAtual) {
+                                System.out.println(j + "° Andar: Elevador: Subindo | Andar: " + j
+                                        + " Botões: subir (" + app.predio.getEstadoBotaoPainelExternoSobe(j)
+                                        + ") descer: (" + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            } else {
+                                System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            }
+                        } else {
+                            if (j > app.predio.getAndarAtual() && j <= app.andarAtual) {
+                                System.out.println(j + "° Andar: Elevador: Descendo | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            } else {
+                                System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            }
+                        }
+                        Thread.sleep(1000);
+                    }
+                    app.predio.setAndarAtual(app.andarAtual);
+                    app.predio.desativaBota(app.andarAtual);
+
+                } else if (sobeDesce.equalsIgnoreCase("Descer")) {
                     app.predio.chamaElevador("Descer", app.andarAtual);
+                    for (int j = 0; j < app.numAndar; j++) {
+                        if (app.andarAtual < app.predio.getAndarAtual()) {
+                            if (j > app.predio.getAndarAtual()) {
+                                System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            } else if (j > app.andarAtual) {
+                                System.out.println(j + "° Andar: Elevador: Descendo | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            } else {
+                                System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            }
+                        } else {
+                            if (j < app.predio.getAndarAtual() && j >= app.andarAtual) {
+                                System.out.println(j + "° Andar: Elevador: Subindo | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            } else {
+                                System.out.println(j + "° Andar: Elevador: Parado | Andar: " + j + " Botões: subir ("
+                                        + app.predio.getEstadoBotaoPainelExternoSobe(j) + ") descer: ("
+                                        + app.predio.getEstadoBotaoPainelExternoDesce(j) + ")");
+                            }
+                        }
+                        Thread.sleep(1000);
+                    }
+                    app.predio.setAndarAtual(app.andarAtual);
+                    app.predio.desativaBota(app.andarAtual);
                 }
-
-
             }
         }
-
     }
 }

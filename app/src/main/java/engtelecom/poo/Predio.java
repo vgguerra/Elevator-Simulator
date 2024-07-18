@@ -50,7 +50,7 @@ public class Predio{
     }
 
     public void desativaBota(int andar){
-     elevador.desativaBotao(andar);
+     paineisExternos.get(andar).desativaBotoes();
     }
 
 
@@ -108,12 +108,36 @@ public class Predio{
         return elevador.getVisor();
     }
 
+
     /**
      * Irá alterar a direcção para onde o elevador está indo(subindo ou descendo)
      * @param visor
      */
     public void setVisorElevador(String visor){
         elevador.setVisor(visor);
+    }
+
+    /**
+     * Irá retornar 1 se o botão de subida estiver pressionado e 0 caso não esteja
+     * @param andar
+     * @return
+     */
+    public int getEstadoBotaoPainelExternoSobe(int andar){
+        if(paineisExternos.get(andar).getSobe()){
+            return 1;
+        }
+        return 0;
+    }
+
+    public int getEstadoBotaoPainelExternoDesce(int andar){
+        if(paineisExternos.get(andar).getDesce()){
+            return 1;
+        }
+        return 0;
+    }
+
+    public void setEstadoBotaoPainelExterno(boolean estadoBotaoPainelExterno,int andar){
+        paineisExternos.get(andar).desativaBotoes();
     }
 
     /**
