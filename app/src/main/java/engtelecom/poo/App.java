@@ -1,6 +1,5 @@
 package engtelecom.poo;
 
-import java.security.PublicKey;
 import java.util.Scanner;
 
 /**
