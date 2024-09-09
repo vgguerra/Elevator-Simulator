@@ -1,11 +1,29 @@
-# Projeto 01 de POO - Simulador de elevador
-  Neste projeto, a proposta era realizar a criação de um elevador, onde o usuário poderia arbitrar o número de andares ao iniciar o programa, indicar se estava dentro ou fora do elevador, subir e descer de um andar para outro e chamar o elevador em um determinado andar. O principal objetivo deste projeto, era utilizar o princípio da divisão de responsabilidades (SOC, Separation of Concerns) e da responsabilidade única (SRP, Single Responsibility Principle).
+# Simulador de elevador
 
-  ## Funcionalidades do programa
-  - Chamar um elevador em um determinado andar, indicando se deseja subir ou descer
-  - Indicar, quando dentro do elevador, para qual andar o usuário deseja ir, se deslocando do andar atual até o selecionado
+## Objetivos do projeto
+Neste projeto, o objetivo foi realizar a criação de uma aplicação que representaria um elevador dentro de um prédio, onde o foco foi a criação de um aplicação que respeitasse o princípio da divisão de responsabilidades (SOC, Separation of Concerns) e da responsabilidade única (SRP, Single Responsibility Principle). Neste projeto, foi-se simplificado bastante coisa de um real funcionamento de um elevador em um prédio, pois não era o foco principal.
 
-  Abaixo, segue o diagrama de classes UML, indicando os principais atributos e os principais métodos do programa
+## Instruções do programa
+
+### Requisitos
+Para utilizar a aplicação será necessário ter instalado em sua máquina o ``Java`` e o ``Gradle``.
+
+1. O primeiro passo é realizar clonar a aplicação para sua máquina
+
+``git clone https://github.com/vgguerra/POO-Project-1-Elevator-Simulator``
+
+2. Com o projeto em sua máquina, faça a instalação do ``gradle``, no site [gradle](https://gradle.org/install/).
+3. Com o gradle corretamente instalado em sua máquina, navegue até o repositório da aplicação e digite ``./gradlew run -q`` para rodar a aplicação.
+
+### Funcionalidades e como utiliza-lo
+
+Ao iniciar o programa, ele irá perguntar ao usuário a quantidade de andares que o prédio terá. Após selecionar a quantidade de andares, o programa irá lhe questionar se o usuário está dentro ou fora do elevador. Caso esteja dentro, irá ser questionado ao usuário a qual andar ele deseja ir, imprimindo no terminal como está o painel do elevador em cada andar, e informando se o botão de alguma andar dentro do elevador está pressionado ou não. 
+
+Caso o usuário informe que está fora do elevador, irá ser questionado o andar em que o mesmo está e questionando se o usuário quer subir ou descer. Após selecionar, irá ser impresso na tela o status do elevador a cada segundo, indicando se o mesmo está subindo para ir até o andar em que o usuário se encontra ou descendo, além de mostrar se o botão de subir ou descer daquele determinado andar está ou não pressionado.
+
+Reforçando novamente, o intuito deste projeto foi se aprofundar nos conceitos da divisão de responsabilidades (SOC, Separation of Concerns) e da responsabilidade única (SRP, Single Responsibility Principle).
+
+## Diagrama de classes UML
 
 ```mermaid
 classDiagram
@@ -13,53 +31,48 @@ classDiagram
     direction TD
 
     class Botao{
-      -boolean estadoBotao
+        -boolean estadoBotao
 
-      +ativaBotao() boolean
-      +desativaBotao() boolean
+        +ativaBotao() boolean
+        +desativaBotao() boolean
     }
 
     class PainelExterno{
-      -Botao sobe
-      -Botao desce
-      -int andar
-      -String visor
+        -Botao sobe
+        -Botao desce
+        -int andar
+        -String visor
 
-      +apertarBotaoSubida() boolean
-      +apertarBotaoDescida() boolean
+        +apertarBotaoSubida() boolean
+        +apertarBotaoDescida() boolean
     }
 
     class Elevador{
-      -ArrayList~Botao~ botoesAndares
-      -int andar
-      -String visor
+        -ArrayList~Botao~ botoesAndares
+        -int andar
+        -String visor
 
-      +selecioneAndar(andar: int) boolean
-      +desativaBotao(andar: int)
+        +selecioneAndar(int andar) boolean
     }
 
 
     class Predio{
-      -int numAndares
-      -ArrayList~PainelExterno~ paineis
-      -Elevador elevador
+        -int numAndares
+        -ArrayList~PainelExterno~ paineis
+        -Elevador elevador
 
-      +chamaElevador(sobeDesce:String,andar:int) boolean
-      +selecionaAndar(andar:int) boolean
-      +desativaBotaPainelExterno(andar:int)
+        +chamaElevador(sobeDesce,andar) boolean
+        +selecionaAndar(andar) boolean
     }
 
     class App{
-      -Predio predio
-
-      +imprimeAndares(andar:int)
-      +imprimePainel(app:App,andarSelecionado:int,dentroFora:String)
+        -Predio predio
     }
 
 
     Botao "2" --* "1" PainelExterno
     Botao "1..*" --* "1" Elevador
     PainelExterno "1" --* "1" Predio
-    Elevador "1" --* "1" Predio    
+    Elevador "1" --* "1" Predio
     Predio "1" --* "1" App
 ```
